@@ -1,0 +1,1 @@
+in ts , use import synx intead of const require 
