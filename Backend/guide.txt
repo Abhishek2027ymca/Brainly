@@ -1,0 +1,42 @@
+in ts , use import synx intead of const require 
+@tsignore 
+express does have a ts linrayry 
+to add backward compatibity , 
+/ we have a separte types file 
+
+//________________________________error ________________________________error1. ES Module vs CommonJS Error
+
+Error:
+
+ECMAScript imports cannot be used in CommonJS
+
+Cause:
+
+Using import (ESM)
+But TS/Node treating file as CommonJS
+
+Fix:
+
+"type": "module"
+"module": "NodeNext"
+"verbatimModuleSyntax": false
+🔴 2. Missing Type Declarations (Express)
+
+Error:
+
+Could not find declaration file for 'express'
+
+Cause:
+
+Express is JS → TS needs types
+Or "types": [] blocking them
+
+Fix:
+
+npm install -D @types/express
+
+AND either:
+
+"types": ["node", "express"]
+
+OR remove "types" completely ✅

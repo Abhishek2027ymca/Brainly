@@ -1,7 +1,16 @@
+import mongoose, { model, Model, Schema } from "mongoose";
 
-import mongoose from "mongoose";
+mongoose.connect("mongodb+srv://admin:rr8prOazvrC6Tzi1@cluster0.byjr6ke.mongodb.net/brainly")
 
-mongoose.connect(
-  "mongodb+srv://admin:rr8prOazvrC6Tzi1@cluster0.byjr6ke.mongodb.net/todoapp"
-);
 
+const UserSchema = new Schema({
+  username: { type: String, unique: true },
+  password: String
+});
+
+export const UserModel =  model("User" , UserSchema);
+/// ste1 is toc reate the skeleton an dthne fill the the skeleton
+
+
+
+ 
