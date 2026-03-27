@@ -8,8 +8,8 @@ import express from "express";  // import exrpress
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { UserModel } from "./db";
-
-const secretKey = "jfvnjhbs656435"
+import { secretKey } from "./config";
+import {userMiddleware} from "./middleware";
 
 
 const app = express();
@@ -58,15 +58,16 @@ app.post("/api/v1/signin", async (req, res) => {
 
    // if user exist  then create a toikenn 
    if(!existingUser){
-    res.status(400).json({
+    res.status(403).json({
         message : "Invalid credentials"
     })
    } else {
       // process of making a jwt token 
-    const token = jwt.sign({ username : username }, secretKey);
+    const token = jwt.sign({ id : existingUser._id }, secretKey);
     // through that token  
     res.json({
-        token : token
+        token : token   
+
     })
    }
 
@@ -74,7 +75,14 @@ app.post("/api/v1/signin", async (req, res) => {
 
 
 
-app.get("/api/v1/brain/share", (req, res) => {
+app.get("/api/v1/content", userMiddleware, (req, res) => {
+
+   const link = req.body.link ;
+   const type = req.body.type ;
+
+   // to get userid , use middleware to verify the token and get the user id from the token and then use that user id to get the content of that user
+  
+
 
 });
 app.get("/api/v1/brain/:shareLink", (req, res) => {
